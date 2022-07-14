@@ -1,6 +1,5 @@
 import re
 import requests
-from bs4 import *
 
 def available(pattern, found):
     if re.search(pattern, str(found)):
