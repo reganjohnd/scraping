@@ -21,7 +21,7 @@ def define_urls_makrocoza():
     response = soup.find_all("a", class_='mak-footer-v2__category-name')
     names = [x.text.strip() for x in response]
     links = [x['href'] for x in response]
-    categories = pd.DataFrame({'name':names, 'link':links}).reset_index(inplace=True)
+    categories = pd.DataFrame({'name':names, 'link':links})
 
 
     for i in tqdm(range(0, len(categories))):
@@ -34,7 +34,7 @@ def define_urls_makrocoza():
         names = [x.text.strip() for x in response]
         links = [x.a['href'] for x in response]
         tmp = pd.DataFrame({'category':categories['name'][i], 'name':names, 'link':links})
-        sub_categories = pd.concat([sub_categories, tmp]).reset_index(inplace=True)
+        sub_categories = pd.concat([sub_categories, tmp])
 
     sub_categories = sub_categories.reset_index(inplace=False).iloc[:, 1:]
 
