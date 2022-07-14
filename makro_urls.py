@@ -48,7 +48,7 @@ def define_urls_makrocoza():
         links = [x.a['href'] for x in response]
 
         tmp = pd.DataFrame({'category':shf.link_category(sub_categories, sub_categories['link'][i]), 'sub_category':sub_categories['name'][i], 'name':names, 'link':['https://www.makro.co.za' + link for link in links]})
-        sub_sub_categories = pd.concat([sub_sub_categories, tmp]).reset_index(inplace=True)
+        sub_sub_categories = pd.concat([sub_sub_categories, tmp])
 
 
     sub_sub_categories = sub_sub_categories.reset_index(inplace=False).iloc[:, 1:]
