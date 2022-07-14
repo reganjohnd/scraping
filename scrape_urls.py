@@ -1,3 +1,10 @@
+import re
+import requests
+from bs4 import *
+import pandas as pd
+from datetime import date
+import scraping_helper_functions as shf
+
 def scrape_extract(urls):
     mdf = pd.DataFrame(columns=['date', 'link', 'price', 'name', 'delivery', 'store'])
     for url in urls:
@@ -13,7 +20,7 @@ def scrape_extract(urls):
             toggle = False
 
         for i in range(0, lastPage):
-            response = paginationResponse(toggle, url, page=i)
+            response = shf.paginationResponse(toggle, url, page=i)
             soup = BeautifulSoup(response.text, 'lxml')
 
             ### product and price
@@ -27,8 +34,8 @@ def scrape_extract(urls):
             storePattern = 'Store'
             deliveryPattern = 'Delivery'
             availability = [str(x.find_all('span', {'class' : 'fulfillment'})) for x in result]
-            storeAvailability = [available(storePattern, x) for x in availability]
-            deliveryAvailability = [available(deliveryPattern, x) for x in availability]
+            storeAvailability = [shf.available(storePattern, x) for x in availability]
+            deliveryAvailability = [shf.available(deliveryPattern, x) for x in availability]
 
             # extract product page link
             link_list = ['www.makro.co.za' + x.find_all('a', class_='product-tile-inner__img', href=True)[0]['href'] for x in result]

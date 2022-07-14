@@ -1,3 +1,5 @@
+import scraping_helper_functions as shf
+
 import pandas as pd
 import requests
 from bs4 import *
@@ -43,7 +45,7 @@ def define_urls_makrocoza():
         names = [x.text.strip() for x in response]
         links = [x.a['href'] for x in response]
 
-        tmp = pd.DataFrame({'category':link_category(sub_categories, sub_categories['link'][i]), 'sub_category':sub_categories['name'][i], 'name':names, 'link':['https://www.makro.co.za' + link for link in links]})
+        tmp = pd.DataFrame({'category':shf.link_category(sub_categories, sub_categories['link'][i]), 'sub_category':sub_categories['name'][i], 'name':names, 'link':['https://www.makro.co.za' + link for link in links]})
         sub_sub_categories = pd.concat([sub_sub_categories, tmp])
 
 
