@@ -1,4 +1,9 @@
 import pandas as pd
+import requests
+from bs4 import *
+
+from tqdm import tqdm_notebook as tqdm
+
 def define_urls_makrocoza():
     categories = pd.DataFrame(columns=['name', 'link'])
     sub_categories = pd.DataFrame(columns=['category', 'name', 'link'])
