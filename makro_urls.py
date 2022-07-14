@@ -21,7 +21,7 @@ def define_urls_makrocoza():
     response = soup.find_all("a", class_='mak-footer-v2__category-name')
     names = [x.text.strip() for x in response]
     links = [x['href'] for x in response]
-    categories = pd.DataFrame({'name':names, 'link':links})
+    categories = pd.DataFrame({'name':names, 'link':links}).reset_index(inplace=True)
 
 
     for i in tqdm(range(0, len(categories))):
@@ -34,7 +34,7 @@ def define_urls_makrocoza():
         names = [x.text.strip() for x in response]
         links = [x.a['href'] for x in response]
         tmp = pd.DataFrame({'category':categories['name'][i], 'name':names, 'link':links})
-        sub_categories = pd.concat([sub_categories, tmp])
+        sub_categories = pd.concat([sub_categories, tmp]).reset_index(inplace=True)
 
     sub_categories = sub_categories.reset_index(inplace=False).iloc[:, 1:]
 
@@ -48,7 +48,7 @@ def define_urls_makrocoza():
         links = [x.a['href'] for x in response]
 
         tmp = pd.DataFrame({'category':shf.link_category(sub_categories, sub_categories['link'][i]), 'sub_category':sub_categories['name'][i], 'name':names, 'link':['https://www.makro.co.za' + link for link in links]})
-        sub_sub_categories = pd.concat([sub_sub_categories, tmp])
+        sub_sub_categories = pd.concat([sub_sub_categories, tmp]).reset_index(inplace=True)
 
 
     sub_sub_categories = sub_sub_categories.reset_index(inplace=False).iloc[:, 1:]
@@ -93,7 +93,7 @@ def scrape_extract(urls):
             # extract rating
             # rating = [x.find_all('div', class_='bv_text') for x in result]
 
-            df = pd.DataFrame({'date':date.today(), 'link':link_list, 'price':priceList, 'name':nameList, 'delivery':deliveryAvailability, 'store':storeAvailability})        # print(mdf)
+            df = pd.DataFrame({'date':date.today(), 'link':link_list, 'price':priceList, 'name':nameList, 'delivery':deliveryAvailability, 'store':storeAvailability}).reset_index(inplace=True)        # print(mdf)
         mdf = pd.concat([df, mdf]).reset_index(inplace=False)
     return mdf
 
