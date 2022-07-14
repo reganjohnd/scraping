@@ -2,7 +2,9 @@ import scraping_helper_functions as shf
 
 import pandas as pd
 import requests
+import re
 from bs4 import *
+from datetime import date
 
 from tqdm import tqdm_notebook as tqdm
 
