@@ -95,6 +95,10 @@ def scrape_extract(urls):
 
             df = pd.DataFrame({'date':date.today(), 'link':link_list, 'price':priceList, 'name':nameList, 'delivery':deliveryAvailability, 'store':storeAvailability}).reset_index(inplace=True)        # print(mdf)
         mdf = pd.concat([df, mdf])
-    return mdf
+    return mdf.reset_index(inplace=False)
+
+if __name__ == "__main__":
+    output = scrape_extract(define_urls_makrocoza().iloc[2, :])
+    print(output)
 
 
