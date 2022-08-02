@@ -52,7 +52,7 @@ def define_urls_makrocoza():
 
 
     sub_sub_categories = sub_sub_categories.reset_index(inplace=False).iloc[:, 1:]
-    return sub_sub_categories['link']
+    return list(sub_sub_categories['link'])
 #scrape_extract(define_urls_makrocoza()).to_csv('C:\\Users\\regan\\OneDrive - 22Seven Digital\\5-scripts\\scraping_output.csv', index=False)
 
 def scrape_extract(urls):
@@ -98,7 +98,7 @@ def scrape_extract(urls):
     return mdf.reset_index(inplace=False)
 
 if __name__ == "__main__":
-    output = scrape_extract(define_urls_makrocoza().iloc[2, :])
-    print(output)
+    scrape_extract(define_urls_makrocoza()).to_csv()
+
 
 
