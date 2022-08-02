@@ -93,7 +93,7 @@ def scrape_extract(urls):
             # extract rating
             # rating = [x.find_all('div', class_='bv_text') for x in result]
 
-            df = pd.DataFrame({'date':date.today(), 'link':link_list, 'price':priceList, 'name':nameList, 'delivery':deliveryAvailability, 'store':storeAvailability}).reset_index(inplace=True)        # print(mdf)
+            df = pd.DataFrame({'date':date.today(), 'link':link_list, 'price':priceList, 'name':nameList, 'delivery':deliveryAvailability, 'store':storeAvailability})        # print(mdf)
         mdf = pd.concat([df, mdf])
     return mdf.reset_index(inplace=False)
 
