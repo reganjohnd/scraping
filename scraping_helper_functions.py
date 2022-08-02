@@ -11,12 +11,13 @@ def isPagination(toggle, url, page):
     if not toggle:
         return url
     if toggle:
-        return f'{url[:-1]}{{{page}}}'
+        return f'{url[:]}?q=%3Arelevance&page={page}'
 
 def paginationResponse(toggle, url, page):
     if toggle:
         tmp = f'{isPagination(toggle, url, page)}'
         activeUrl = f"f'{tmp}'"
+        print(activeUrl)
         return requests.get(eval(activeUrl))
     if not toggle:
         return requests.get(url)
