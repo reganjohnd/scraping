@@ -55,6 +55,8 @@ def define_urls_makrocoza():
     return list(sub_sub_categories['link'])
 #scrape_extract(define_urls_makrocoza()).to_csv('C:\\Users\\regan\\OneDrive - 22Seven Digital\\5-scripts\\scraping_output.csv', index=False)
 
+pqs = '?q=%3Arelevance&page='
+
 def scrape_extract(urls):
     mdf = pd.DataFrame(columns=['date', 'link', 'price', 'name', 'delivery', 'store'])
     for url in urls:
@@ -70,7 +72,7 @@ def scrape_extract(urls):
             toggle = False
 
         for i in range(0, lastPage):
-            response = shf.paginationResponse(toggle, url, page=i)
+            response = shf.paginationResponse(toggle, url, page=i, page_query_string=pqs)
             soup = BeautifulSoup(response.text, 'lxml')
 
             ### product and price
@@ -98,7 +100,7 @@ def scrape_extract(urls):
     return mdf.reset_index(inplace=False)
 
 if __name__ == "__main__":
-    scrape_extract(define_urls_makrocoza()).to_csv()
+    scrape_extract(define_urls_makrocoza()[34:38]).to_csv('C:\\Users\\regan\\OneDrive - 22Seven Digital\\1. Admin\\test.csv', index=False)
 
 
 

@@ -7,17 +7,17 @@ def available(pattern, found):
     else:
         return 0
 
-def isPagination(toggle, url, page):
+def isPagination(toggle, url, page, page_query_string):
     if not toggle:
         return url
     if toggle:
-        return f'{url[:]}?q=%3Arelevance&page={page}'
+        return f'{url[:]}{page_query_string}{page}'
 
-def paginationResponse(toggle, url, page):
+def paginationResponse(toggle, url, page, page_query_string):
     if toggle:
-        tmp = f'{isPagination(toggle, url, page)}'
+        tmp = f'{isPagination(toggle, url, page, page_query_string)}'
         activeUrl = f"f'{tmp}'"
-        print(activeUrl)
+        # print(activeUrl)
         return requests.get(eval(activeUrl))
     if not toggle:
         return requests.get(url)
